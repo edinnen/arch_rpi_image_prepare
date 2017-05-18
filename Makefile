@@ -15,7 +15,7 @@ ARCH_URL=http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
 ARCH_FILE:=ArchLinuxARM-rpi-2-latest.tar.gz
 endif
 
-PIRATEBOX_WS_GIT:=https://github.com/PirateBox-Dev/PirateBoxScripts_Webserver.git
+PIRATEBOX_WS_GIT:=https://github.com/edinnen/Thanksgiving_Intranet.git
 
 PIRATEBOX_PACKAGE_FOLDER=piratebox-ws
 
