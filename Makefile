@@ -1,8 +1,8 @@
 # Default build variables, they may be passed via command line
 ARCH?=rpi
 BUILD?=$(shell date +%d-%m-%Y)
-VERSION?="1.1.1-1"
-SOURCE?="piratebox"
+VERSION?="1.0"
+SOURCE?="Fucknix"
 BRANCH?="master"
 
 ifeq ($(ARCH),rpi)
