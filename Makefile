@@ -2,7 +2,7 @@
 ARCH?=rpi
 BUILD?=$(shell date +%d-%m-%Y)
 VERSION?="1.0"
-SOURCE?="Fucknix"
+SOURCE?="Absolute-Danknix"
 BRANCH?="master"
 
 ifeq ($(ARCH),rpi)
@@ -17,7 +17,7 @@ endif
 
 PIRATEBOX_WS_GIT:=https://github.com/edinnen/Thanksgiving_Intranet.git
 
-PIRATEBOX_PACKAGE_FOLDER=piratebox-ws
+THANKSGIVING_PACKAGE_FOLDER=thanksgiving-ws
 
 # Name of the generated image file
 IMAGE_FILENAME=./$(SOURCE)_$(ARCH)_$(VERSION)-$(BUILD).img
@@ -89,15 +89,15 @@ $(ARCH_FILE):
 	@wget -q --show-progress -c $(ARCH_URL)
 	@echo ""
 
-$(PIRATEBOX_PACKAGE_FOLDER):
+$(THANKSGIVING_PACKAGE_FOLDER):
 	@echo "## Obtaining piratebox scripts..."
-	git clone $(PIRATEBOX_WS_GIT) $(PIRATEBOX_PACKAGE_FOLDER) > /dev/null
-	cd $(PIRATEBOX_PACKAGE_FOLDER) && git checkout $(BRANCH) > /dev/null
+	git clone $(PIRATEBOX_WS_GIT) $(THANKSGIVING_PACKAGE_FOLDER) > /dev/null
+	cd $(THANKSGIVING_PACKAGE_FOLDER) && git checkout $(BRANCH) > /dev/null
 	@echo ""
 
-build_piratebox: $(PIRATEBOX_PACKAGE_FOLDER)
-	@echo "# Building piratebox package..."
-	cd $(PIRATEBOX_PACKAGE_FOLDER) && make
+build_piratebox: $(THANKSGIVING_PACKAGE_FOLDER)
+	@echo "# Building Absolute-Danknix package..."
+	cd $(THANKSGIVING_PACKAGE_FOLDER) && make
 	@echo ""
 
 mount_image: $(BOOT_FOLDER) $(ROOT_FOLDER) get_lodevice
@@ -118,7 +118,7 @@ install_files: build_piratebox
 	sudo mkdir -p $(TGT_CHROOT_FOLDER) > /dev/null
 	sudo tar -xf $(ARCH_FILE) -C $(ROOT_FOLDER) --warning=none
 	sudo cp -rv $(SRC_PACKAGE_FOLDER)/$(ARCH)/* $(TGT_PACKAGE_FOLDER) > /dev/null
-	sudo cp $(PIRATEBOX_PACKAGE_FOLDER)/*.tar.gz "$(ROOT_FOLDER)/root"
+	sudo cp $(THANKSGIVING_PACKAGE_FOLDER)/*.tar.gz "$(ROOT_FOLDER)/root"
 	sudo cp -rv $(SRC_CHROOT_FOLDER)/* $(TGT_CHROOT_FOLDER) > /dev/null
 	sudo mv $(ROOT_FOLDER)/boot/* $(BOOT_FOLDER) > /dev/null
 	sudo cp chroot/wpa_supplicant.conf $(BOOT_FOLDER)/ > /dev/null
@@ -159,7 +159,7 @@ clean: chroot_cleanup umount free_lo
 	@echo ""
 
 cleanall: clean
-	rm -rf $(PIRATEBOX_PACKAGE_FOLDER) > /dev/null
+	rm -rf $(THANKSGIVING_PACKAGE_FOLDER) > /dev/null
 	rm -f $(ARCH_FILE) > /dev/null
 
 package:
